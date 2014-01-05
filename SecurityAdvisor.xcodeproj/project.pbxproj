@@ -12,6 +12,7 @@
 		7648C2821879E6B100D95C6D /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7648C2811879E6B100D95C6D /* AppKit.framework */; };
 		7648C2851879E75E00D95C6D /* App.m in Sources */ = {isa = PBXBuildFile; fileRef = 7648C2841879E75E00D95C6D /* App.m */; };
 		7648C2871879F03400D95C6D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7648C2861879F03400D95C6D /* Security.framework */; };
+		76D68976187A0E0C00D8F646 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76D68975187A0E0C00D8F646 /* IOKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,7 @@
 		7648C2831879E75E00D95C6D /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		7648C2841879E75E00D95C6D /* App.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = App.m; sourceTree = "<group>"; };
 		7648C2861879F03400D95C6D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		76D68975187A0E0C00D8F646 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76D68976187A0E0C00D8F646 /* IOKit.framework in Frameworks */,
 				7648C2871879F03400D95C6D /* Security.framework in Frameworks */,
 				7648C2821879E6B100D95C6D /* AppKit.framework in Frameworks */,
 				7648C2341879E2DB00D95C6D /* Foundation.framework in Frameworks */,
@@ -71,6 +74,7 @@
 		7648C2321879E2DB00D95C6D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				76D68975187A0E0C00D8F646 /* IOKit.framework */,
 				7648C2861879F03400D95C6D /* Security.framework */,
 				7648C2811879E6B100D95C6D /* AppKit.framework */,
 				7648C2331879E2DB00D95C6D /* Foundation.framework */,
@@ -261,6 +265,7 @@
 				7648C2401879E2DB00D95C6D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
