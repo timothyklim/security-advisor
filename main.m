@@ -9,7 +9,7 @@ typedef struct kinfo_proc kinfo_proc;
 OSStatus KeychainLockedCallback(SecKeychainEvent, SecKeychainCallbackInfo*, void*);
 NSArray* GetProcessList(NSArray*);
 void KillProcessByFilter(NSArray*);
-void EventsCallback(void* refCon, io_service_t, natural_t, void*);
+void EventsCallback(void*, io_service_t, natural_t, void*);
 void RegisterPowerEvents(void);
 void RegisterDisplayEvents(void);
 
@@ -20,16 +20,16 @@ int main(int argc, const char* argv[])
         NSLog(@"run it as root");
         exit(1);
     }
-    
+
     @autoreleasepool {
         RegisterPowerEvents();
         RegisterDisplayEvents();
-        
+
         SecKeychainAddCallback(&KeychainLockedCallback, kSecLockEventMask, NULL);
-        
+
         CFRunLoopRun();
     }
-    
+
     return 0;
 }
 
@@ -42,7 +42,7 @@ NSArray* GetProcessList(NSArray* filters)
     size_t length = 0;
     kinfo_proc* procList = NULL;
     NSArray* result = nil;
-    
+
     if ( (sysctl(procCmd, procCmdSize, NULL, &length, NULL, 0) == 0) &&
         ((procList = malloc(length)) != NULL) &&
         (sysctl(procCmd, procCmdSize, procList, &length, NULL, 0) == 0) )
@@ -66,10 +66,10 @@ NSArray* GetProcessList(NSArray* filters)
         }
         result = [[NSArray alloc] initWithArray:processes];
     }
-    
+
     if (procList != NULL)
         free(procList);
-    
+
     return result;
 }
 
@@ -88,7 +88,7 @@ OSStatus KeychainLockedCallback(SecKeychainEvent event, SecKeychainCallbackInfo*
 {
     NSArray* filter = [[NSArray alloc] initWithObjects:@"ssh-agent", nil];
     KillProcessByFilter(filter);
-    
+
     return 0;
 }
 
@@ -105,7 +105,7 @@ void EventsCallback(void* refCon, io_service_t service, natural_t messageType, v
         {
             NSArray* filter = [[NSArray alloc] initWithObjects:@"ssh", @"ssh-agent", nil];
             KillProcessByFilter(filter);
-            
+
             break;
         }
     }
@@ -117,7 +117,7 @@ void RegisterPowerEvents()
     IONotificationPortRef  notificationPort;
     io_object_t            notification;
     io_connect_t powerPort;
-    
+
     powerPort = IORegisterForSystemPower(NULL, &notificationPort, EventsCallback, &notification);
     if (powerPort == 0) {
         NSLog(@"IORegisterForSystemPower failed");
@@ -126,7 +126,6 @@ void RegisterPowerEvents()
     CFRunLoopAddSource(CFRunLoopGetCurrent(), IONotificationPortGetRunLoopSource(notificationPort),
                        kCFRunLoopCommonModes);
     IOObjectRelease(powerPort);
-    
 }
 
 
@@ -135,7 +134,7 @@ void RegisterDisplayEvents()
     IONotificationPortRef notificationPort;
     io_object_t notification;
     io_service_t displayPort;
-    
+
     displayPort = IOServiceGetMatchingService(kIOMasterPortDefault,
                                               IOServiceNameMatching("IODisplayWrangler"));
     if (displayPort == 0) {
