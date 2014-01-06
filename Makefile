@@ -2,12 +2,13 @@ CC = clang
 
 CFLAGS = -O2 -Wall -Werror
 FRAMEWORKS := -framework Foundation -framework IOKit -framework Security
-LIBRARIES := -lobjc
-LDFLAGS = $(LIBRARIES) $(FRAMEWORKS) -arch x86_64 -dynamic
+LDFLAGS = $(FRAMEWORKS) -arch x86_64 -dynamic
+
+EXE := security-advisor
 
 
 all:
-	$(CC) $(CFLAGS) $(LDFLAGS) -o security-advisor main.m
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(EXE) main.m
 
 clean:
-	rm -f *.o security-advisor
+	rm -f $(EXE)
